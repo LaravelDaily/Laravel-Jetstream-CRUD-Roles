@@ -12,7 +12,7 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('description');
             $table->string('phone_number');
-            $table->string('plate_no');
+            $table->string('plate_no')->unique();
             $table->string('city');
             $table->timestamps();
             $table->softDeletes();
