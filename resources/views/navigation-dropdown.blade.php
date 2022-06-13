@@ -19,7 +19,7 @@
                 @can('task_access')
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-jet-nav-link href="{{ route('tasks.index') }}" :active="request()->routeIs('tasks.*')">
-                            Tasks
+                            Add vehicle
                         </x-jet-nav-link>
                     </div>
                 @endcan
