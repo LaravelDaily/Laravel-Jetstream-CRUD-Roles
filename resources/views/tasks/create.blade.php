@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Create Task
+            Add new vehicle
         </h2>
     </x-slot>
 
@@ -16,6 +16,30 @@
                             <input type="text" name="description" id="description" type="text" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('description', '') }}" />
                             @error('description')
+                                <p class="text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label for="phone_number" class="block font-medium text-sm text-gray-700">phone_number</label>
+                            <input type="text" name="phone_number" id="phone_number" type="text" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                                   value="{{ old('phone_number', '') }}" />
+                            @error('phone_number')
+                                <p class="text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label for="plate_no" class="block font-medium text-sm text-gray-700">plate_no</label>
+                            <input type="text" name="plate_no" id="plate_no" type="text" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                                   value="{{ old('plate_no', '') }}" />
+                            @error('plate_no')
+                                <p class="text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label for="city" class="block font-medium text-sm text-gray-700">city</label>
+                            <input type="text" name="city" id="city" type="text" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                                   value="{{ old('city', '') }}" />
+                            @error('city')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>

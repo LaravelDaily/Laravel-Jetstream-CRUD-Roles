@@ -12,6 +12,15 @@ class StoreTaskRequest extends FormRequest
         return [
             'description' => [
                 'required', 'string',
+            ],
+            'phone_number' => [
+                'required', 'string',
+            ],
+            'plate_no' => [
+                'required', 'string',
+            ],
+            'city' => [
+                'required', 'string',
             ]
         ];
     }
