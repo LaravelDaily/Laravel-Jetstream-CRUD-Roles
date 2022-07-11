@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Models\carbon_level;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -53,6 +54,15 @@ class TasksController extends Controller
         $task->update($request->validated());
 
         return redirect()->route('tasks.index');
+    }
+
+    public function carbonemission()
+    {
+        $carbon = request()->carbon_level;
+        carbon_level::create([
+            "carbon_level" => $carbon
+        ]);
+        echo $carbon;
     }
 
     public function destroy(Task $task)

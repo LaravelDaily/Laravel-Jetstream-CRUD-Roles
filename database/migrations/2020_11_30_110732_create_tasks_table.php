@@ -14,6 +14,7 @@ class CreateTasksTable extends Migration
             $table->string('phone_number');
             $table->string('plate_no')->unique();
             $table->string('city');
+            // $table->string('carbon_level'); 
             $table->timestamps();
             $table->softDeletes();
         });
