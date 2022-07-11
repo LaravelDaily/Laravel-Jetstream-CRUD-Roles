@@ -55,11 +55,72 @@
                                         {{ $task->city   }}
                                     </td>
                                 </tr>
+                                <tr class="border-b">
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Carbon emission    
+                                    </th>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
+                                        carbon
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
                 </div>
+                <div>
+                    <canvas id="carbon_level" height="280" width="600"></canvas>
+                </div>
             </div>
         </div>
     </div>
+    @push('scripts')
+    <script>
+        $(document).ready(function(){
+        var url = "{{url('chart/data')}}";
+        var dateTime = new Array();
+        var carbonLevel = new Array();
+            $.get(url, function(response){
+                response.forEach(function(data){
+                    dateTime.push(data.created_at);
+                    carbonLevel.push(data.carbon_level);
+                });
+                var carbonChart = document.getElementById("carbon_level").getContext('2d');
+            
+                var carbonDiagram = new Chart(carbonChart, {
+                    type: 'line',
+                    data: {
+                        labels:dateTime,
+                        datasets: [{
+                            label: 'Carbon level',
+                            data: carbonLevel,
+                            borderWidth: 3,
+                            borderColor: 'rgb(0, 127, 212)',
+                            fill:false,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        animation:{
+                            duration: 0
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }],
+
+                            xAxes: [{
+                                gridLines: {
+                                    color: '#f2f3f8'
+                                },
+                            }]
+                        },
+                    }
+                });
+            });
+        });
+    </script>
+    @endpush
 </x-app-layout>
+
