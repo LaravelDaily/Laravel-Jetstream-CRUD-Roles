@@ -65,6 +65,13 @@ class TasksController extends Controller
         echo $carbon;
     }
 
+    public function chartAjax()
+    {
+        $response = carbon_level::query()->orderBy('id', 'DESC')->take(10)->get();
+
+        return response()->json($response->reverse()->values());
+    }
+
     public function destroy(Task $task)
     {
         abort_if(Gate::denies('task_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
