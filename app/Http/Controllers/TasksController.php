@@ -14,11 +14,17 @@ class TasksController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('task_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $tasks = Task::all();
-
-        return view('tasks.index', compact('tasks'));
+        //abort_if(Gate::denies('task_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        
+        if(auth()->user()->user_type == 1) {
+            $tasks = Task::all();
+            return view('tasks.index', compact('tasks'));
+        } else {
+            $tasks = Task::where('user_id', auth()->user()->id)->get();
+            
+            return view('tasks.index', compact('tasks'));
+        }
+       
     }
 
     public function create()
@@ -30,8 +36,9 @@ class TasksController extends Controller
 
     public function store(StoreTaskRequest $request)
     {
-        Task::create($request->validated());
-
+        $data = $request->validated();
+        $data['user_id'] = auth()->user()->id;
+        Task::create($data);
         return redirect()->route('tasks.index');
     }
 
@@ -68,7 +75,7 @@ class TasksController extends Controller
     public function chartAjax()
     {
         $response = carbon_level::query()->orderBy('id', 'DESC')->take(10)->get();
-
+        
         return response()->json($response->reverse()->values());
     }
 

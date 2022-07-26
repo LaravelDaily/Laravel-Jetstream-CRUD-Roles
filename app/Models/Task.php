@@ -14,6 +14,7 @@ class Task extends Model
         'description',
         'phone_number',
         'plate_no',
+        'user_id',
         'city',
     ];
 }
