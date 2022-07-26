@@ -76,7 +76,8 @@
     @push('scripts')
     <script>
         $(document).ready(function(){
-        var url = "{{url('chart/data')}}";
+            setInterval(function(){
+                var url = "{{url('chart/data')}}";
         var dateTime = new Array();
         var carbonLevel = new Array();
             $.get(url, function(response){
@@ -119,6 +120,8 @@
                     }
                 });
             });
+            },1000)
+        
         });
     </script>
     @endpush
