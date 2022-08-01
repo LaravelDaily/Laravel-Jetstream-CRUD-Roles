@@ -15,7 +15,9 @@ class CreateCarbonLevelsTable extends Migration
     {
         Schema::create('carbon_levels', function (Blueprint $table) {
             $table->id();
-            $table->string('carbon_level'); 
+            $table->string('carbon_level');
+            $table->foreignId('task_id')->references('id')->on('tasks')->onDelete(null);
+            $table->time('time');
             $table->timestamps();
         });
     }

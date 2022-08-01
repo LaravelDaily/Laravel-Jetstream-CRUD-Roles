@@ -9,7 +9,6 @@ class carbon_level extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'carbon_level'
-    ];
+    protected $guarded = [];
+
 }

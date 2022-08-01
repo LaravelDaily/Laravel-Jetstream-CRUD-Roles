@@ -49,7 +49,7 @@
                                 </tr>
                                 <tr class="border-b">
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        city    
+                                        city
                                     </th>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
                                         {{ $task->city   }}
@@ -57,9 +57,9 @@
                                 </tr>
                                 <tr class="border-b">
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Carbon emission    
+                                        Average Carbon emission
                                     </th>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200" id="average_emission">
                                         carbon
                                     </td>
                                 </tr>
@@ -77,16 +77,20 @@
     <script>
         $(document).ready(function(){
             setInterval(function(){
-                var url = "{{url('chart/data')}}";
+                $('#average_emission').val()
+                var url = "{{url('chart/data/'.$task->id)}}";
         var dateTime = new Array();
         var carbonLevel = new Array();
             $.get(url, function(response){
                 response.forEach(function(data){
-                    dateTime.push(data.created_at);
+                    dateTime.push(data.time);
                     carbonLevel.push(data.carbon_level);
                 });
+                var sum = 0;
+                $.each(carbonLevel,function(){sum+=parseFloat(this) || 0;});
+                $('#average_emission').html(sum/10);
                 var carbonChart = document.getElementById("carbon_level").getContext('2d');
-            
+
                 var carbonDiagram = new Chart(carbonChart, {
                     type: 'line',
                     data: {
@@ -121,7 +125,7 @@
                 });
             });
             },1000)
-        
+
         });
     </script>
     @endpush
